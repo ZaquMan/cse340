@@ -56,10 +56,13 @@ nav {
   }
 
   li {
+    padding: 1rem;
+  }
+
+  li a {
     /* font-family: var(--text-accent-family); */
     text-decoration: none;
     color: white;
-    padding: 1rem;
   }
 }
 

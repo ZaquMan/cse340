@@ -1,5 +1,20 @@
 {
 	"cSpell.words": [
 		"Delorean"
+	],
+	"sqltools.connections": [
+		{
+			"pgOptions": {
+				"ssl": {
+					"rejectUnauthorized": true
+				}
+			},
+			"ssh": "Disabled",
+			"previewLimit": 50,
+			"server": "localhost",
+			"driver": "PostgreSQL",
+			"connectString": "postgresql://cse340:S6KRgPSNCzS1IDyjMQU672JxPNhlXtnq@dpg-d480apfdiees739lc1h0-a.oregon-postgres.render.com/cse340_km79",
+			"name": "Render Database"
+		}
 	]
 }

@@ -149,6 +149,8 @@ nav {
 /******* Classification *****************/
 #inv-display {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-around;
   list-style: none;
 }

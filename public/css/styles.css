@@ -146,6 +146,44 @@ nav {
   }
 }
 
+/******* Classification *****************/
+#inv-display {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+#inv-display li {
+  border: 1px solid var(--text-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 30%;
+}
+
+#inv-display a {
+  display: block;
+}
+
+#inv-display img {
+  width: 100%;
+  border-radius: 0.25rem;
+}
+
+.namePrice h2 {
+  margin: 0.25rem 0;
+}
+
+.namePrice a{
+  text-align: center;
+  color: var(--text-accent-color);
+  text-decoration: none;
+}
+
+.namePrice span {
+  display: block;
+  text-align: center;
+}
+
 /******* Large Screen Modifiers *********/
 @media only screen and (min-width: 800px) {
   body {

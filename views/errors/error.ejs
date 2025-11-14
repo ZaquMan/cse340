@@ -1,0 +1,11 @@
+<%# Content Heading
+	Uses the page title as the heading if it exists
+	If there is no title, redirect to the home page %>
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%# Error Message %>
+<p><%- message %></p>

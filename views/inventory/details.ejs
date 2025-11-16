@@ -1,0 +1,15 @@
+<%# Content Heading
+	Uses the page title as the heading if it exists
+	If there is no title, redirect to the home page %>
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%# Message block - Display temp messages %>
+<%# messages() %>
+
+<%# Vehicle Details Display
+	Shows the HTML used to build the inventory grid %>
+<%- detailHtml %>

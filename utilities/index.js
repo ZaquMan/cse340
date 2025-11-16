@@ -18,7 +18,7 @@ Util.getNav = async function (req, res, next) {
 			' vehicles">' +
 			row.classification_name +
 			"</a>";
-		list += "<li>";
+		list += "</li>";
 	});
 	list += "</ul>";
 	return list;
@@ -56,6 +56,43 @@ Util.buildClassificationGrid = async function (data) {
 	}
 	return grid;
 }
+
+/* **************************************
+* Build the inventory details table HTML
+* ************************************ */
+Util.buildInventoryDetails = async function (data) {
+	let details = '<div class="vehicle-details">';
+	if (data != null) {
+		details += '<div class="vehicle-image">'
+			+ '<img src="' + data.inv_image + '" '
+			+ 'alt="Image of ' + data.inv_make + ' '
+			+ data.inv_model + '"></div>';
+		details += '<div class="detail-table">';
+		details += '<div class="highlighted">'
+			+ data.inv_make + ' ' + data.inv_model
+			+ ' Details</div>';
+		details += '<div class="highlighted"><span>'
+			+ 'Price: </span > '
+			+ Number(data.inv_price).toLocaleString('en-US', {
+				style: 'currency', currency: 'USD',
+				minimumFractionDigits: 0
+			}) + '</div>';
+		details += '<div><span class="highlighted'
+			+ '">Description: </span>'
+			+ data.inv_description + '</div>';
+		details += '<div><span class="highlighted'
+			+ '">Color: </span>'
+			+ data.inv_color + '</div>';
+		details += '<div><span class="highlighted"'
+			+ '>Miles: </span>'
+			+ data.inv_miles.toLocaleString('en-US')
+			+ '</div>';
+	} else {
+		details += `<p class="notice">Sorry, we don't have any details on this vehicle yet. Please check back later!</p>`;
+	}
+	details += '</div>';
+	return details;
+};
 
 /* ****************************************
  * Middleware For Handling Errors

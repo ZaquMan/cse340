@@ -1,0 +1,23 @@
+<%# Content Heading
+	Use the page's title as the heading 
+	or redirect back to the home page. %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%# Display flash messages, if any are present %>
+<%- messages() %>
+
+<form method="post" id="account-login">
+	<fieldset>
+		<label for="account_email">Email:</label>
+		<input id="account_email" type="email" name="account_email">
+		<label for="account_password">Password:</label>
+		<input type="password" name="account_password">
+		<button id="account_password" type="submit">LOGIN</button>
+		<p>No account? <a href="/account/register">Sign-up</a></p>
+	</fieldset>
+</form>

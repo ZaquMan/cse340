@@ -11,6 +11,7 @@
   --text-accent-family: 'Times New Roman', Times, serif;
   --text-accent-color: #23D5D5;
   --text-family: Arial, Helvetica, sans-serif;
+  --bg-color: #05063e;
 }
 
 * {
@@ -214,6 +215,51 @@ nav {
 
 .detail-table div:nth-child(even) {
   background-color: lightgray;
+}
+
+/******* Login **************************/
+
+#account-login fieldset{
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.15rem;
+  border: 2px solid var(--bg-color);
+  border-radius: 20px;
+  padding: 1rem;
+  background-color: var(--bg-color);
+}
+
+#account-login label {
+  color: white;
+}
+
+#account-login input {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: white;
+}
+
+#account-login button {
+  max-width: 30%;
+  margin: 0 auto;
+  background-color: var(--text-accent-color);
+  border-radius: 10px;
+  padding: 0.25rem 1rem;
+  font-weight: bolder;
+  font-size: 1.15rem;
+  color: white;
+}
+
+#account-login p {
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+}
+
+#account-login a {
+  color: white;
 }
 
 /******* Large Screen Modifiers *********/

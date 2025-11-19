@@ -12,6 +12,8 @@
   --text-accent-color: #23D5D5;
   --text-family: Arial, Helvetica, sans-serif;
   --bg-color: #05063e;
+  --error-color: #eb0000;
+  --accent-color-2: #162c83;
 }
 
 * {
@@ -48,7 +50,7 @@ h2 {
 
 /******* Footer *************************/
 #test-error-link {
-  color: red;
+  color: var(--error-color);
 }
 
 /******* Navigation Bar *****************/
@@ -184,7 +186,7 @@ nav {
 
 .namePrice a{
   text-align: center;
-  color: var(--text-accent-color);
+  color: var(--accent-color-2);
   text-decoration: none;
 }
 

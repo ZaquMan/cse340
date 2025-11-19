@@ -87,6 +87,7 @@ Util.buildInventoryDetails = async function (data) {
 			+ '>Miles: </span>'
 			+ data.inv_miles.toLocaleString('en-US')
 			+ '</div>';
+		details += '</div>';
 	} else {
 		details += `<p class="notice">Sorry, we don't have any details on this vehicle yet. Please check back later!</p>`;
 	}

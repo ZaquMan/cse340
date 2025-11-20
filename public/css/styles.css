@@ -219,9 +219,9 @@ nav {
   background-color: lightgray;
 }
 
-/******* Login **************************/
+/******* Login / Registration Forms *****/
 
-#account-login fieldset{
+form fieldset{
   max-width: 400px;
   margin: 0 auto;
   display: flex;
@@ -233,17 +233,17 @@ nav {
   background-color: var(--bg-color);
 }
 
-#account-login label {
+form label {
   color: white;
 }
 
-#account-login input {
+form input {
   margin-bottom: 0.5rem;
   font-size: 2rem;
   color: white;
 }
 
-#account-login button {
+form button {
   max-width: 30%;
   margin: 0 auto;
   background-color: var(--text-accent-color);
@@ -251,16 +251,17 @@ nav {
   padding: 0.25rem 1rem;
   font-weight: bolder;
   font-size: 1.15rem;
-  color: white;
+  color: var(--text-color);
 }
 
-#account-login p {
+form p {
   text-align: center;
   font-size: 1rem;
   color: white;
 }
 
-#account-login a {
+form a,
+form h2 {
   color: white;
 }
 

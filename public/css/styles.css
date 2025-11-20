@@ -239,8 +239,8 @@ form label {
 
 form input {
   margin-bottom: 0.5rem;
-  font-size: 2rem;
-  color: white;
+  height: 2rem;
+  color: var(--text-color);
 }
 
 form button {

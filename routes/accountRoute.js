@@ -8,4 +8,6 @@ const utilities = require('../utilities/');
 router.get('/login', utilities.handleErrors(accountController.buildLogin));
 // Route to build registration page
 router.get('/register', utilities.handleErrors(accountController.buildRegister));
+// Route to receive registration form POST
+router.post('/register', utilities.handleErrors(accountController.registerAccount));
 module.exports = router;

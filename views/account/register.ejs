@@ -20,19 +20,13 @@
 		<h2>Register</h2>
 		<label for="account_firstname">First name</label>
 		<input type="text" id="account_firstname" name="account_firstname" required
-		<% if (account_firstname) { %>
-			value="<%= account_firstname %>"
-		<% } %>>
+			value="<%= locals.account_firstname %>">
 		<label for="account_lastname">Last name</label>
 		<input type="text" name="account_lastname" id="account_lastname" required
-		<% if (account_lastname) { %>
-			value="<%= account_lastname %>"
-		<% } %>>
+			value="<%= locals.account_lastname %>">
 		<label for="account_email">Email address</label>
 		<input type="email" name="account_email" id="account_email" required
-		<% if (account_email) { %>
-			value="<%= account_email %>"
-		<% } %>>
+			value="<%= locals.account_email %>">
 		<label for="account_password">Password</label>
 		<input type="password" name="account_password" id="account_password"
 			autocomplete="new-password" minlength="12" required

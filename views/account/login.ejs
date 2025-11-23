@@ -11,7 +11,16 @@
 <%# Display flash messages, if any are present %>
 <%- messages() %>
 
-<form method="post" id="account-login">
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<form method="post" id="account-login" action="/account/login">
 	<fieldset>
 		<label for="account_email">Email:</label>
 		<input id="account_email" type="email" name="account_email" required>

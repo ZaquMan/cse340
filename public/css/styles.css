@@ -14,6 +14,7 @@
   --bg-color: #05063e;
   --error-color: #eb0000;
   --accent-color-2: #162c83;
+  --text-accent-color-2: #9d9d9e;
 }
 
 * {
@@ -263,6 +264,21 @@ form p {
 form a,
 form h2 {
   color: white;
+}
+
+#password-reqs {
+  color: var(--text-accent-color-2);
+  font-size: 0.8rem;
+}
+
+#password-reqs ul {
+  list-style: none;
+  margin-top: 0;
+}
+
+#password-reqs li {
+  color: var(--text-accent-color-2);
+  font-size: 0.75rem;
 }
 
 /******* Large Screen Modifiers *********/

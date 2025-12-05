@@ -229,7 +229,8 @@ form label {
   color: white;
 }
 
-form input {
+form input,
+form select {
   margin-bottom: 0.5rem;
   height: 2rem;
   color: var(--text-color);

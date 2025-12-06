@@ -14,6 +14,7 @@
     "body-parser": "^2.2.0",
     "connect-flash": "^0.1.1",
     "connect-pg-simple": "^10.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.10",
     "express": "^4.18.2",
@@ -21,9 +22,11 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.18.2",
     "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
     "pg": "^8.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
-  }
+  },
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }

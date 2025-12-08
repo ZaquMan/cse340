@@ -40,10 +40,13 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ************************** */
 invCont.buildInventoryManagement = async function (req, res, next) {
 	const nav = await utilities.getNav();
+	const classificationSelection = await utilities.buildClassificationList();
 	req.flash("notice", "This page is for management use ONLY.");
 	res.render("./inventory/management", {
 		title: "Inventory Management",
 		nav,
+		errors: null,
+		classificationSelection,
 	});
 };
 
@@ -68,7 +71,7 @@ invCont.addClassification = async function (req, res) {
 
 	const nav = await utilities.getNav();
 	if (regResult) {
-		
+
 		req.flash("notice", `${classification_name} has been added.`);
 		res.status(201).render("inventory/add-classification", {
 			title: "Add Classification",
@@ -116,7 +119,7 @@ invCont.addInventory = async function (req, res) {
 
 
 	if (regResult) {
-		
+
 		req.flash("notice", `The ${inv_year} ${inv_make} ${inv_model} has been added.`);
 		res.status(201).render("inventory/add-inventory", {
 			title: "Add Inventory",
@@ -130,7 +133,7 @@ invCont.addInventory = async function (req, res) {
 			errors: null,
 			title: "Add Inventory",
 			nav,
-			inv_make, 
+			inv_make,
 			inv_model,
 			inv_year,
 			inv_description,
@@ -141,6 +144,19 @@ invCont.addInventory = async function (req, res) {
 			inv_color,
 			classificationListSelected,
 		});
+	}
+}
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+	const classification_id = parseInt(req.params.classification_id)
+	const invData = await invModel.getInventoryByClassificationId(classification_id)
+	if (invData[0].inv_id) {
+		return res.json(invData)
+	} else {
+		next(new Error("No data returned"))
 	}
 }
 

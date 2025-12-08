@@ -31,4 +31,6 @@ router.post("/add/inventory",
 router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmation));
 router.post("/delete", utilities.handleErrors(invController.deleteInventoryItem));
 
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
 module.exports = router;

@@ -5,8 +5,30 @@
 } %>
 
 <%- messages() %>
+
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
 <ul>
 <li><a href="/inv/add/classification">Add New Classification</a></li>
 
 <li><a href="/inv/add/inventory">Add New Inventory</a></li>
 </ul>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification from the drop down to see the inventory for
+	that classification.</p>
+
+<%- classificationSelection %>
+
+<%# Inventory items added via JS DOM Manipulation %>
+<table id="inventoryDisplay"></table>
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+<script src="../../js/inventory.js"></script>

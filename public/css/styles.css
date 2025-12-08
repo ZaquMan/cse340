@@ -15,6 +15,7 @@
   --error-color: #eb0000;
   --accent-color-2: #162c83;
   --text-accent-color-2: #9d9d9e;
+  --wave-accessible-red: #ff1f1f;
 }
 
 * {
@@ -272,6 +273,56 @@ form h2 {
   color: var(--text-accent-color-2);
   font-size: 0.75rem;
 }
+
+/******* Inv Management Table ***********/
+#inventoryDisplay {
+  margin-top: 1rem;
+  width: 80%;
+}
+
+#inventoryDisplay tbody td {
+  border-bottom: 1px solid var(--text-color);
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  text-align: left;
+  white-space: nowrap;
+}
+
+#inventoryDisplay td:not(:first-child) {
+  width: 1%;
+}
+
+#inventoryDisplay a {
+  text-decoration: none;
+}
+
+#inventoryDisplay tbody td:nth-child(2) {
+  border: 1px solid var(--text-accent-color);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: var(--text-accent-color);
+  font-weight: bold;
+}
+
+#inventoryDisplay tbody td:nth-child(2):hover {
+  box-shadow: inset -2px -2px 5px #30303094;
+}
+
+#inventoryDisplay tbody td:last-child {
+  border: 1px solid var(--wave-accessible-red);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: var(--wave-accessible-red);
+  font-weight: bold;
+  color: #000;
+}
+
+#inventoryDisplay tbody td:last-child:hover {
+  box-shadow: inset -2px -2px 5px #30303094;
+}
+
 
 /******* Large Screen Modifiers *********/
 @media only screen and (min-width: 800px) {

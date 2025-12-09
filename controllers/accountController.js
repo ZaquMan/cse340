@@ -3,6 +3,7 @@ const utilities = require('../utilities/');
 const accountModel = require('../models/account-model');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { updatePasswordRules } = require('../utilities/account-validation');
 require("dotenv").config();
 
 /* ****************************************
@@ -127,4 +128,100 @@ async function buildAccount(req, res, next) {
 	});
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccount, };
+async function buildUpdate(req, res, next) {
+	let nav = await utilities.getNav();
+	const account_id = parseInt(req.params.account_id);
+	const accountData = await accountModel.getAccountById(account_id);
+
+
+	if (accountData.account_type == "Client") {
+		res.render("account/update-client", {
+		title: "Update Account",
+		nav,
+		errors: null,
+		account_id: accountData.account_id,
+		account_firstname: accountData.account_firstname,
+		account_lastname: accountData.account_lastname,
+		account_email: accountData.account_email,
+		});
+	} else {
+		res.render("account/update-client", {
+		title: "Update Account",
+		nav,
+		errors: null,
+		account_id: account_id,
+		account_firstname: accountData.account_firstname,
+		account_lastname: accountData.account_lastname,
+		account_email: accountData.account_email,
+		});
+	}
+}
+
+async function updateAccount(req, res, next) {
+	let nav = await utilities.getNav();
+	const { account_firstname, account_lastname, account_email, account_id } = req.body;
+	const updateResult = await accountModel.updateAccountInfo(
+		account_id,
+		account_firstname,
+		account_lastname,
+		account_email
+	)
+
+	if (updateResult) {
+		req.flash("notice", "The account information was successfully updated.");
+		res.redirect("/account/");
+	} else {
+		req.flash("notice", "Sorry, the update failed.");
+		res.status(501).render("account/update-client", {
+			title: "Update Account",
+			nav,
+			errors: null,
+			account_id: account_id,
+			account_firstname: res.locals.accountData.account_firstname,
+			account_lastname: res.locals.accountData.account_lastname,
+			account_email: res.locals.accountData.account_email,
+		});
+	}
+}
+
+async function updatePassword(req, res, next) {
+	let nav = await utilities.getNav();
+	const { account_password, account_id } = req.body;
+
+	// Hash the password before storing
+	let hashedPassword;
+	// regular password and cost (salt is generated automatically)
+	hashedPassword = await bcrypt.hashSync(account_password, 10);
+	
+	const updateResult = await accountModel.updatePassword(
+		account_id,
+		hashedPassword
+	)
+
+	if (updateResult) {
+		req.flash("notice", "The account information was successfully updated.");
+		res.redirect("/account/");
+	} else {
+		req.flash("notice", "Sorry, the update failed.");
+		res.status(501).render("account/update-client", {
+			title: "Update Account",
+			nav,
+			errors: null,
+			account_id: account_id,
+			account_firstname: res.locals.accountData.account_firstname,
+			account_lastname: res.locals.accountData.account_lastname,
+			account_email: res.locals.accountData.account_email,
+		});
+	}
+}
+
+async function accountLogout(req, res, next) {
+	res.clearCookie('jwt');
+	res.redirect("/");
+}
+
+module.exports = {
+	buildLogin, buildRegister, registerAccount, accountLogin,
+	buildAccount, buildUpdate, updateAccount, updatePassword,
+	accountLogout
+};

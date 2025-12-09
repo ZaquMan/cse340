@@ -163,4 +163,18 @@ Util.checkLogin = (req, res, next) => {
 	}
 }
 
+/* ***********************
+ * Check account type
+ * **********************/
+Util.checkAccountType = (req, res, next) => {
+	if (res.locals.accountData.account_type == 'Employee' ||
+		res.locals.accountData.account_type == 'Admin') {
+		next();
+	} else {
+		req.flash("notice", "Please log in as an employee or admin to access that page.");
+		return res.redirect("/account/login");
+	}
+}
+
+
 module.exports = Util;

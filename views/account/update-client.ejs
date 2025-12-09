@@ -1,0 +1,54 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<form method="post" action="/account/update/info">
+	<h3>Update Account Information</h3>
+	<fieldset>
+		<input type="hidden" name="account_id" value="<%= locals.account_id %>">
+		<label for="account_firstname">First name</label>
+		<input type="text" id="account_firstname" name="account_firstname" required
+			minlength="1" value="<%= locals.account_firstname %>">
+		<label for="account_lastname">Last name</label>
+		<input type="text" name="account_lastname" id="account_lastname" required
+			minlength="2" value="<%= locals.account_lastname %>">
+		<label for="account_email">Email address</label>
+		<input type="email" name="account_email" id="account_email" required
+			value="<%= locals.account_email %>">
+		<button type="submit">Update Info</button>
+	</fieldset>
+</form>
+
+<form method="post" action="/account/update/password">
+	<h3>Update Password</h3>
+	<fieldset>
+		<input type="hidden" name="account_id" value="<%= locals.account_id %>">
+		<label for="account_password">Password</label>
+		<input type="password" name="account_password" id="account_password"
+			autocomplete="new-password" minlength="12" required
+			patter="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+		<div id="password-reqs">
+			This will update your current password. Your password must include:
+			<ul>
+				<li>12 Characters</li>
+				<li>1 Uppercase Character</li>
+				<li>1 Number</li>
+				<li>1 Special Character</li>
+			</ul>
+		</div>
+		<button type="submit">Update Password</button>
+	</fieldset>
+</form>

@@ -48,6 +48,11 @@ h2 {
   font-size: 3rem;
   font-weight: bold;
 }
+
+#tools a {
+  padding: 0 0.5rem;
+}
+
 /******* Footer *************************/
 #test-error-link {
   color: var(--error-color);

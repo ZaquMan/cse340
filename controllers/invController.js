@@ -228,7 +228,7 @@ invCont.updateInventory = async (req, res, next) => {
 		const classificationList = await utilities.buildClassificationList();
 		const itemName = `${inv_make} ${inv_model}`;
 		req.flash("notice", "Sorry, the update failed.");
-		res.status(501).render("inventry/edit-inventory", {
+		res.status(501).render("inventory/edit-inventory", {
 			title: "Edit " + itemName,
 			nav,
 			classificationList,

@@ -31,6 +31,15 @@ router.post("/add/inventory",
 router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmation));
 router.post("/delete", utilities.handleErrors(invController.deleteInventoryItem));
 
+// API route to get inventory for items matching classification.
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+// Route to build inventory modification view
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildInventoryModification));
+// Route to accept modified inventory form
+router.post("/update",
+	reqValidate.addInventoryRules(),
+	reqValidate.checkUpdateInventory,
+	utilities.handleErrors(invController.updateInventory));
 
 module.exports = router;

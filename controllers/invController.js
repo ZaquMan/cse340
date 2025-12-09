@@ -160,4 +160,92 @@ invCont.getInventoryJSON = async (req, res, next) => {
 	}
 }
 
+/* ***************************
+ * Build Inventory Update View
+ * ***************************/
+invCont.buildInventoryModification = async (req, res) => {
+	const nav = await utilities.getNav();
+	const classificationList = await utilities.buildClassificationList();
+	const inventoryId = parseInt(req.params.inventory_id);
+	const invDetails = await invModel.getInventoryDetails(inventoryId);
+	const itemName = `${invDetails.inv_make} ${invDetails.inv_model}`
+	res.render("inventory/edit-inventory", {
+		title: "Modify " + itemName,
+		nav,
+		errors: null,
+		classificationList,
+		inv_id: inventoryId,
+		inv_make: invDetails.inv_make,
+		inv_model: invDetails.inv_model,
+		inv_year: invDetails.inv_year,
+		inv_description: invDetails.inv_description,
+		inv_image: invDetails.inv_image,
+		inv_thumbnail: invDetails.inv_thumbnail,
+		inv_price: invDetails.inv_price,
+		inv_miles: invDetails.inv_miles,
+		inv_color: invDetails.inv_color,
+		classification_id: invDetails.classification_id,
+	});
+}
+
+/* ***********************
+ * Update Inventory
+ * ***********************/
+invCont.updateInventory = async (req, res, next) => {
+	const nav = await utilities.getNav();
+	const {
+		inv_id,
+		inv_make,
+		inv_model,
+		inv_description,
+		inv_image,
+		inv_thumbnail,
+		inv_price,
+		inv_year,
+		inv_miles,
+		inv_color,
+		classification_id,
+	} = req.body;
+	const updateResult = await invModel.updateInventory(
+		inv_id,
+		inv_make,
+		inv_model,
+		inv_description,
+		inv_image,
+		inv_thumbnail,
+		inv_price,
+		inv_year,
+		inv_miles,
+		inv_color,
+		classification_id
+	);
+
+	if (updateResult) {
+		const itemName = updateResult.inv_make + " " + updateResult.inv_model;
+		req.flash("notice", `The ${itemName} was successfully updated.`);
+		res.redirect("/inv/");
+	} else {
+		const classificationList = await utilities.buildClassificationList();
+		const itemName = `${inv_make} ${inv_model}`;
+		req.flash("notice", "Sorry, the update failed.");
+		res.status(501).render("inventry/edit-inventory", {
+			title: "Edit " + itemName,
+			nav,
+			classificationList,
+			errors: null,
+			inv_id,
+			inv_make,
+			inv_model,
+			inv_year,
+			inv_description,
+			inv_image,
+			inv_thumbnail,
+			inv_price,
+			inv_miles,
+			inv_color,
+			classification_id
+		});
+	}
+}
+
 module.exports = invCont;

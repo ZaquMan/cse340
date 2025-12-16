@@ -6,7 +6,6 @@ const reqValidation = require("../utilities/newsletter-validation");
 
 // Default route - Newsletter View
 router.get("/",
-	utilities.checkAccountType,
 	utilities.handleErrors(newsletterController.buildNewsletterList)
 );
 
@@ -26,7 +25,6 @@ router.post("/create",
 
 // Route for viewing an individual newsletter
 router.get("/view/:newsletter_id",
-	utilities.checkAccountType,
 	utilities.handleErrors(newsletterController.buildNewsletterDetails)
 );
 

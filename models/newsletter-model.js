@@ -20,7 +20,7 @@ async function createNewsletter(newsletter_headline, newsletter_body) {
  * **********************/
 async function getAllNewsletters() {
 	try {
-		const sql = "SELECT newsletter_id, newsletter_headline, newsletter_published_date FROM newsletter";
+		const sql = "SELECT newsletter_id, newsletter_headline, newsletter_published_date FROM newsletter ORDER BY newsletter_id";
 		const data = await pool.query(sql);
 		return data.rows;
 	} catch (error) {

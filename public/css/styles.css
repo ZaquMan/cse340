@@ -381,7 +381,7 @@ form h2 {
   box-shadow: inset -2px -2px 5px #30303094;
 }
 
-#newsletter-table tbody td:last-child {
+#newsletter-table tbody td:nth-child(4) {
   border: 1px solid var(--wave-accessible-red);
   border-radius: 5px;
   padding: 3px;
@@ -390,7 +390,7 @@ form h2 {
   color: #000;
 }
 
-#newsletter-table tbody td:last-child:hover {
+#newsletter-table tbody td:nth-child(4):hover {
   box-shadow: inset -2px -2px 5px #30303094;
 }
 

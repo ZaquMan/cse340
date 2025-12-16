@@ -206,8 +206,9 @@ Util.buildNewsletterTable = async function (res) {
 				newsletterTable += `<td><a href='/newsletter/update/${letter.newsletter_id}' title='Click to update'>Modify</a></td>`;
 				newsletterTable += `<td><a href='/newsletter/delete/${letter.newsletter_id}' title='Click to delete'>Delete</a></td></tr>`;
 			} else {
-				newsletterTable += `<td>&nbsp;</td>`;
-				newsletterTable += `<td>&nbsp;</td></tr>`;
+				// newsletterTable += `<td>&nbsp;</td>`;
+				// newsletterTable += `<td>&nbsp;</td></tr>`;
+				newsletterTable += "</tr>";
 			}
 		});
 		newsletterTable += "</tbody></table>";

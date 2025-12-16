@@ -17,8 +17,8 @@
 
 <form action="/newsletter/update" method="post" id="update-newsletter">
 	<fieldset>
-		<input type="hidden" name="newsletter_id" value="<%- locals.newsletter_id %>"></text>
-		<input type="hidden" name="newsletter_published_date" value="<%- locals.newsletter_published_date %>">
+		<input type="hidden" name="newsletter_id" required readonly value="<%- locals.newsletter_id %>"></text>
+		<input type="hidden" name="newsletter_published_date" readonly value="<%- locals.newsletter_published_date %>">
 		<label for="newsletter_headline">Newsletter Title</label>
 		<input type="text" name="newsletter_headline" id="newsletter_headline"
 		minlength="1" required value="<%- locals.newsletter_headline %>">

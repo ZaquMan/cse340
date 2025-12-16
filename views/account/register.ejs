@@ -40,6 +40,13 @@
 				<li>1 Special Character</li>
 			</ul>
 		</div>
+		<div id="newsletter_checkbox">
+			<input type="checkbox" name="account_newsletter" id="account_newsletter"
+			<% if (account_newsletter) { %>
+				checked
+			<% } %>>
+			<label for="account_newsletter">Subscribe to Newsletters</label>
+		</div>
 		<button type="submit">Register</button>
 	</fieldset>
 </form>

@@ -19,6 +19,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const newsletterRoute = require("./routes/newsletterRoute")
 
 /* ***********************
  * Middleware
@@ -63,6 +64,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 app.use("/dev", devRoute)
 app.use("/account", accountRoute)
+app.use("/newsletter", newsletterRoute)
 
 // File Not Found Route - MUST BE LAST route in the list
 app.use(async(req, res, next) => {

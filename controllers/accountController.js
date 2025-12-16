@@ -3,7 +3,6 @@ const utilities = require('../utilities/');
 const accountModel = require('../models/account-model');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { updatePasswordRules } = require('../utilities/account-validation');
 require("dotenv").config();
 
 /* ****************************************
@@ -37,6 +36,11 @@ async function registerAccount(req, res) {
 	let nav = await utilities.getNav();
 	const { account_firstname, account_lastname, account_email, account_password } = req.body;
 
+	let newsletter_subscription = false;
+	if (req.body.hasOwnProperty("account_newsletter")) {
+		newsletter_subscription = true;
+	}
+
 	// Hash the password before storing
 	let hashedPassword;
 	try {
@@ -55,7 +59,8 @@ async function registerAccount(req, res) {
 		account_firstname,
 		account_lastname,
 		account_email,
-		hashedPassword
+		hashedPassword,
+		newsletter_subscription
 	)
 
 	if (regResult) {
@@ -82,7 +87,7 @@ async function registerAccount(req, res) {
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
-	let nav = utilities.getNav();
+	let nav = await utilities.getNav();
 	const { account_email, account_password } = req.body;
 	const accountData = await accountModel.getAccountByEmail(account_email);
 	if (!accountData) {
@@ -136,23 +141,25 @@ async function buildUpdate(req, res, next) {
 
 	if (accountData.account_type == "Client") {
 		res.render("account/update-client", {
-		title: "Update Account",
-		nav,
-		errors: null,
-		account_id: accountData.account_id,
-		account_firstname: accountData.account_firstname,
-		account_lastname: accountData.account_lastname,
-		account_email: accountData.account_email,
+			title: "Update Account",
+			nav,
+			errors: null,
+			account_id: accountData.account_id,
+			account_firstname: accountData.account_firstname,
+			account_lastname: accountData.account_lastname,
+			account_email: accountData.account_email,
+			account_newsletter: accountData.account_newsletter,
 		});
 	} else {
 		res.render("account/update-client", {
-		title: "Update Account",
-		nav,
-		errors: null,
-		account_id: account_id,
-		account_firstname: accountData.account_firstname,
-		account_lastname: accountData.account_lastname,
-		account_email: accountData.account_email,
+			title: "Update Account",
+			nav,
+			errors: null,
+			account_id: account_id,
+			account_firstname: accountData.account_firstname,
+			account_lastname: accountData.account_lastname,
+			account_email: accountData.account_email,
+			account_newsletter: accountData.account_newsletter,
 		});
 	}
 }
@@ -160,11 +167,17 @@ async function buildUpdate(req, res, next) {
 async function updateAccount(req, res, next) {
 	let nav = await utilities.getNav();
 	const { account_firstname, account_lastname, account_email, account_id } = req.body;
+	let newsletter_subscription = false;
+	if (req.body.hasOwnProperty("account_newsletter")) {
+		newsletter_subscription = true;
+	}
+	
 	const updateResult = await accountModel.updateAccountInfo(
 		account_id,
 		account_firstname,
 		account_lastname,
-		account_email
+		account_email,
+		newsletter_subscription
 	)
 
 	if (updateResult) {
@@ -180,6 +193,7 @@ async function updateAccount(req, res, next) {
 			account_firstname: res.locals.accountData.account_firstname,
 			account_lastname: res.locals.accountData.account_lastname,
 			account_email: res.locals.accountData.account_email,
+			account_newsletter: newsletter_subscription
 		});
 	}
 }

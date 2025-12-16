@@ -1,0 +1,22 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect("/")
+} %>
+
+<%- messages() %>
+
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<% if (locals.accountData.account_type == "Employee" || locals.accountData.account_type == 'Admin') { %>
+	<h3><a title="Click to write a new newsletter" href="/newsletter/create">Write a New Newsletter</a></h3>
+<% } %>
+
+<%- newsletterTable %>

@@ -1,0 +1,28 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect("/")
+} %>
+
+<%- messages() %>
+
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<form action="/newsletter/create" method="post" id="create-newsletter">
+	<fieldset>
+		<label for="newsletter_headline">Newsletter Title</label>
+		<input type="text" name="newsletter_headline" id="newsletter_headline"
+		minlength="1" required value="<%= locals.newsletter_headline %>">
+		<label for="newsletter_body">Newsletter Content</label>
+		<textarea id="newsletter_body" name="newsletter_body" rows="8" required
+		spellcheck placeholder="Write your newsletter here..."><%= locals.newsletter_body %></textarea>
+	<button type="submit">Publish Newsletter</button>
+	</fieldset>
+</form>

@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const newsletterModel = require("../models/newsletter-model");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const Util = {};
@@ -176,5 +177,44 @@ Util.checkAccountType = (req, res, next) => {
 	}
 }
 
+/* *******************
+ * Build table of newsletters
+ * ******************/
+Util.buildNewsletterTable = async function (res) {
+	const newsletters = await newsletterModel.getAllNewsletters();
+	// Setup the table labels
+	if (newsletters.length > 0) {
+		let newsletterTable = '<table id="newsletter-table"><thead>';
+		newsletterTable += "<tr><th>Newsletter</th><td>Published</td><td>&nbsp;</td><td>&nbsp;</td></tr>";
+		newsletterTable += "</thead>";
+		// Setup the table body
+		newsletterTable += "<tbody>";
+		// Iterate through the rows of newsletters and add them to the table
+		newsletters.forEach(letter => {
+			console.log(letter.newsletter_id + " - " + letter.newsletter_headline);
+			newsletterTable += `<tr><th><a href="/newsletter/view/${letter.newsletter_id}" title="Click to view this newsletter">`;
+			newsletterTable += `${letter.newsletter_headline}</a></th>`;
+			const timestamp = Date.parse(letter.newsletter_published_date);
+			const publish_date = new Intl.DateTimeFormat("en-US", {
+				month: "short",
+				day: "2-digit",
+				year: "numeric"
+			}).format(timestamp);
+			newsletterTable += `<td>${publish_date}</td>`;
+			if (res.locals.accountData.account_type == 'Employee' ||
+				res.locals.accountData.account_type == 'Admin') {
+				newsletterTable += `<td><a href='/newsletter/update/${letter.newsletter_id}' title='Click to update'>Modify</a></td>`;
+				newsletterTable += `<td><a href='/newsletter/delete/${letter.newsletter_id}' title='Click to delete'>Delete</a></td></tr>`;
+			} else {
+				newsletterTable += `<td>&nbsp;</td>`;
+				newsletterTable += `<td>&nbsp;</td></tr>`;
+			}
+		});
+		newsletterTable += "</tbody></table>";
+		return newsletterTable;
+	} else {
+		return '<p class="notice">There are no newsletters to display.</p>';
+	}
+}
 
 module.exports = Util;

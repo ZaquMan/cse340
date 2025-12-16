@@ -15,6 +15,7 @@
   --error-color: #eb0000;
   --accent-color-2: #162c83;
   --text-accent-color-2: #9d9d9e;
+  --text-subtle: #707070;
   --wave-accessible-red: #ff1f1f;
 }
 
@@ -242,9 +243,24 @@ form select {
   color: var(--text-color);
 }
 
+form #newsletter_checkbox{
+  display: flex;
+  justify-content: left;
+  gap: 0.5rem;
+}
+
+form #newsletter_checkbox input {
+  width: 1.5rem;
+}
+
+form #newsletter_checkbox label {
+  align-self: center;
+}
+
 form button {
-  max-width: 30%;
-  margin: 0 auto;
+  max-width: 40%;
+  width: fit-content;
+  margin: 0.5rem auto 5px;
   background-color: var(--text-accent-color);
   border-radius: 10px;
   padding: 0.25rem 1rem;
@@ -328,6 +344,61 @@ form h2 {
   box-shadow: inset -2px -2px 5px #30303094;
 }
 
+/******* Newsletter Table ***********/
+#newsletter-table {
+  margin-top: 1rem;
+  width: 80%;
+  border-spacing: 0;
+}
+
+#newsletter-table tbody tr:nth-child(odd) {
+  background-color: #ddd;
+}
+
+#newsletter-table th,
+#newsletter-table td {
+  text-align: left;
+  white-space: nowrap;
+}
+
+#newsletter-table td:not(:first-child) {
+  width: 1%;
+}
+
+#newsletter-table a {
+  text-decoration: none;
+}
+
+#newsletter-table tbody td:nth-child(3) {
+  border: 1px solid var(--text-accent-color);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: var(--text-accent-color);
+  font-weight: bold;
+}
+
+#newsletter-table tbody td:nth-child(3):hover {
+  box-shadow: inset -2px -2px 5px #30303094;
+}
+
+#newsletter-table tbody td:last-child {
+  border: 1px solid var(--wave-accessible-red);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: var(--wave-accessible-red);
+  font-weight: bold;
+  color: #000;
+}
+
+#newsletter-table tbody td:last-child:hover {
+  box-shadow: inset -2px -2px 5px #30303094;
+}
+
+/********** Newsletter View **************/
+.subtle {
+  color: var(--text-subtle);
+  text-align: right;
+}
 
 /******* Large Screen Modifiers *********/
 @media only screen and (min-width: 800px) {

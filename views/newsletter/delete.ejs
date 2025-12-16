@@ -1,0 +1,33 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+	res.redirect("/")
+} %>
+
+<%- messages() %>
+
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<h2>Are you sure you want to delete this newsletter?</h2>
+
+<form action="/newsletter/delete" method="post" id="create-newsletter">
+	<fieldset>
+		<input type="hidden" name="newsletter_id" value="<%- locals.newsletter_id %>"></text>
+		<label for="newsletter_headline">Newsletter Title</label>
+		<input type="text" name="newsletter_headline" id="newsletter_headline"
+		minlength="1" readonly value="<%- locals.newsletter_headline %>">
+		<label for="newsletter_body">Newsletter Content</label>
+		<textarea id="newsletter_body" name="newsletter_body" rows="8" readonly
+		spellcheck placeholder="Write your newsletter here..."><%- locals.newsletter_body %></textarea>
+		<label for="newsletter_published_date">Published</label>
+		<input type="text" name="newsletter_published_date" readonly value="<%- locals.newsletter_published_date %>">
+	<button type="submit">Delete Newsletter</button>
+	</fieldset>
+</form>

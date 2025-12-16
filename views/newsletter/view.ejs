@@ -1,0 +1,22 @@
+<%# Display error messages, if any %>
+<% if (errors) { %>
+	<ul class="notices">
+		<% errors.array().forEach(error => {%>
+		<li><%= error.msg %></li>
+	<% }) %>
+	</ul>
+<% } %>
+
+<%- messages() %>
+
+<%# Display errors and messages before the title,
+which is being used for the newsletter headline %>
+
+<% if (title) { %>
+<h1><%- title %></h1>
+<% } else {
+	res.redirect("/")
+} %>
+
+<p><%- locals.newsletter_body %></p>
+<p class="subtle">Published: <%- locals.newsletter_published_date %></p>
